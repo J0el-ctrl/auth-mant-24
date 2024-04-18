@@ -1,6 +1,7 @@
 import {Route,Routes} from 'react-router-dom';
 import { Home,Login} from '../pages/index';
 import { NavbarFront } from '../components/index';
+import { RequiereAuth } from '../components/RequiereAuth';
 
 
 export const MyRoutes = () => {
@@ -9,8 +10,12 @@ export const MyRoutes = () => {
     
         <NavbarFront/>
             <Routes>    
-                      <Route exact path='/' element={<Home/>}/>
-                      <Route exact path='/login' element={<Login/>}/>            
+                <Route exact path='/' element={
+                        <RequiereAuth>
+                          <Home/>
+                        </RequiereAuth>
+                      }/>
+                  <Route exact path='/login' element={<Login/>}/>            
             </Routes>
     
     </>
