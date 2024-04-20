@@ -5,6 +5,8 @@ import styled from 'styled-components';
 
 export const NavbarFront = () => {
   const {user,signOutUser}=UserAuth();
+
+  // para cerrar session
   const handleClickLogout=async()=>{
     try {
       await signOutUser() 
@@ -25,21 +27,32 @@ export const NavbarFront = () => {
          <ContainerActiveNavlink className="navbar-nav me-auto mb-2 mb-lg-0">
                <li className="nav-item">
                       <NavLink className="nav-link" to="/">Home</NavLink>
-                </li>                               
+                </li>        
+                {
+                  user?  <li className="nav-item">
+                  <p className="nav-link">{user.email}</p>
+                          </li> :(null)
+                }                       
+                                           
                 
         </ContainerActiveNavlink>  
         <ContainerrightNavHeader className=''>
           <div className='colorsnav'>
-              <NavLink className="nav-link" to="/register">Registro</NavLink>
-              <NavLink className="nav-link" to="/login">Login</NavLink>              
-              {user?
+          {/* <NavLink className="nav-link" to="/login">Login</NavLink>    */}
+              {/* <NavLink className="nav-link" to="/register">Registro</NavLink> */}
+                {user?
               (
                 <>
               <NavLink className="nav-link" to="/panelcontrol">PANEL</NavLink>
               <button  className='nav-link' onClick={handleClickLogout} >Cerrar session</button>
                 </>
               ) 
-              :(null)}
+              :(
+                <>
+              <NavLink className="nav-link" to="/login">Login</NavLink>   
+              <NavLink className="nav-link" to="/register">Registro</NavLink>
+                </>
+               )}
              
           </div>
          
